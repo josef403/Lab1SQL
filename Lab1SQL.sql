@@ -1,29 +1,29 @@
-/* MoonMissions G-del */
+/* MoonMissions */
 
-/* Använd ”select into” för att ta ut kolumnerna ’Spacecraft’, ’Launch date’,
-’Carrier rocket’, ’Operator’, samt ’Mission type’ för alla lyckade uppdrag
-(Successful outcome) och sätt in i en ny tabell med namn ”SuccessfulMissions”. */
+/* AnvÃ¤nd â€select intoâ€ fÃ¶r att ta ut kolumnerna â€™Spacecraftâ€™, â€™Launch dateâ€™,
+â€™Carrier rocketâ€™, â€™Operatorâ€™, samt â€™Mission typeâ€™ fÃ¶r alla lyckade uppdrag
+(Successful outcome) och sÃ¤tt in i en ny tabell med namn â€SuccessfulMissionsâ€. */
 
 SELECT [Spacecraft], [Launch date], [Carrier rocket], [Operator], [Mission type]
 INTO SuccessfulMissions FROM MoonMissions WHERE [Outcome] = 'Successful' 
 
 GO
 
-/*I kolumnen ’Operator’ har det smugit sig in ett eller flera mellanslag före
-operatörens namn. Skriv en query som uppdaterar ”SuccessfulMissions” och tar
-bort mellanslagen kring operatör */
+/*I kolumnen â€™Operatorâ€™ har det smugit sig in ett eller flera mellanslag fÃ¶re
+operatÃ¶rens namn. Skriv en query som uppdaterar â€SuccessfulMissionsâ€ och tar
+bort mellanslagen kring operatÃ¶r */
 
 UPDATE SuccessfulMissions SET Operator = TRIM(Operator)
 
 GO
 
-/* Users G-del */
+/* Users */
 
-/* Ta ut samtliga rader och kolumner från tabellen ”Users”, men slå ihop ’Firstname’
-och ’Lastname’ till en ny kolumn ’Name’, samt lägg till en extra kolumn ’Gender’
-som du ger värdet ’Female’ för alla användare vars näst sista siffra i personnumret
-är jämn, och värdet ’Male’ för de användare där siffran är udda. Sätt in resultatet i
-en ny tabell ”NewUsers”. */
+/* Ta ut samtliga rader och kolumner frÃ¥n tabellen â€Usersâ€, men slÃ¥ ihop â€™Firstnameâ€™
+och â€™Lastnameâ€™ till en ny kolumn â€™Nameâ€™, samt lÃ¤gg till en extra kolumn â€™Genderâ€™
+som du ger vÃ¤rdet â€™Femaleâ€™ fÃ¶r alla anvÃ¤ndare vars nÃ¤st sista siffra i personnumret
+Ã¤r jÃ¤mn, och vÃ¤rdet â€™Maleâ€™ fÃ¶r de anvÃ¤ndare dÃ¤r siffran Ã¤r udda. SÃ¤tt in resultatet i
+en ny tabell â€NewUsersâ€. */
 
 SELECT Users.*, [FirstName] + ' ' + [LastName] AS 'Name',
   CASE
@@ -36,8 +36,8 @@ FROM Users
 
 GO
 
-/* Skriv en query som returnerar en tabell med alla användarnamn i ”NewUsers”
-som inte är unika i den första kolumnen, och antalet gånger de är duplicerade i
+/* Skriv en query som returnerar en tabell med alla anvÃ¤ndarnamn i â€NewUsersâ€
+som inte Ã¤r unika i den fÃ¶rsta kolumnen, och antalet gÃ¥nger de Ã¤r duplicerade i
 den andra kolumnen. */
 
 SELECT UserName, COUNT(UserName) AS 'Duplicates'
@@ -47,10 +47,11 @@ HAVING COUNT(UserName) > 1
 
 GO
 
-/*Skriv en följd av queries som uppdaterar de användare med dubblerade
-användarnamn som du fann ovan, så att alla användare får ett unikt
-användarnamn. D.v.s du kan hitta på nya användarnamn för de användarna, så
-länge du ser till att alla i ”NewUsers” har unika värden på ’Username’.*/
+/*Skriv en fÃ¶ljd av queries som uppdaterar de anvÃ¤ndare med dubblerade
+anvÃ¤ndarnamn som du fann ovan, sÃ¥ att alla anvÃ¤ndare fÃ¥r ett unikt
+anvÃ¤ndarnamn. D.v.s du kan hitta pÃ¥ nya anvÃ¤ndarnamn fÃ¶r de anvÃ¤ndarna, sÃ¥
+lÃ¤nge du ser till att alla i â€NewUsersâ€ har unika vÃ¤rden pÃ¥ â€™Usernameâ€™.
+*/
 
 SET ANSI_WARNINGS  OFF;
 UPDATE NewUsers SET [UserName] = 'sigpet01' WHERE [ID] = '630303-4894'
@@ -62,18 +63,18 @@ SET ANSI_WARNINGS ON;
 
 GO
 
-/*Skapa en query som tar bort alla kvinnor födda före 1970 från ”NewUsers”.  */
+/*Skapa en query som tar bort alla kvinnor fÃ¶dda fÃ¶re 1970 frÃ¥n â€NewUsersâ€.  */
 
 DELETE FROM NewUsers WHERE [ID] < '7' AND [Gender] = 'Female'
 
 GO
 
-/* Lägg till en ny användare i tabellen ”NewUsers” */
+/* LÃ¤gg till en ny anvÃ¤ndare i tabellen â€NewUsersâ€ */
 
 INSERT INTO NewUsers ([ID], [UserName], [password], [FirstName], [LastName], [Email], [Phone], [Name], Gender)
 VALUES ('301412-0173', 
 'zaki1', 
- CONVERT(nvarchar(28), HASHBYTES('SHA2_512', 'ZakiÄrBäst2021!'), 2), 
+ CONVERT(nvarchar(28), HASHBYTES('SHA2_512', 'ZakiÃ„rBÃ¤st2021!'), 2), 
 'Zakarie', 
 'Isse', 
 'zakki96@hotmail.com',
